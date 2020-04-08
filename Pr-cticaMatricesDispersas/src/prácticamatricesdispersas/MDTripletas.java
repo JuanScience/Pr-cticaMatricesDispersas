@@ -177,8 +177,26 @@ public class MDTripletas {
     }
     
     //Elimina una tripleta
-    public void EliminarTrip(){
-        
+    public void eliminarTrip(int f, int c){
+        int datos = this.getNDatos() + 1;
+        int row = 1; 
+        while (row < datos) {
+            if(this.lista[row][0] == f && this.lista[row][1] == c)
+                break;
+            row++;
+        }
+        if (row < datos){
+            for (int i = row; i < datos - 2; i++) {
+                this.lista[i][0] = this.lista[i + 1][0];
+                this.lista[i][1] = this.lista[i + 1][1];
+                this.lista[i][2] = this.lista[i + 1][2];
+            }
+            this.lista[datos - 1][2] = 0;
+            this.redimensionarListaTrip();
+            System.out.println("Dato eliminado");
+        }else{
+            System.out.println("No se encontró dato");
+        }
     }
     
     //Suma dos matrices en forma de tripletas
@@ -192,7 +210,7 @@ public class MDTripletas {
     }
     
     //Compara dos tripletas
-    public MDTripletas comprarar(MDTripletas B){
+    public MDTripletas comparar(MDTripletas B){
         return null;
     }
     
