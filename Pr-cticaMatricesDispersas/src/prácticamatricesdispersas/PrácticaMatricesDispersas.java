@@ -61,6 +61,7 @@ public class PrácticaMatricesDispersas {
                     insertChange();
                     again();
                 case 4:
+                    remove();
                     again();
                 case 5:
                     again();
@@ -307,8 +308,31 @@ public class PrácticaMatricesDispersas {
         }
     }
     
+    //Elimina el dato ingresado por el usuario
+    public static void remove(){
+        System.out.print("Inserte la fila del dato a ingresar: ");
+        cS = INGRESO.nextLine();
+        while(!isNumeric(cS)){//Mientras no sea numérico
+                System.out.print("Ingrese un dato válido para el número de fila: ");
+                cS = INGRESO.nextLine();
+            }
+        int fila = Integer.parseInt(cS); //Fila del dato a insertar
+        System.out.print("Inserte la columna del dato a ingresar: ");
+        cS = INGRESO.nextLine();
+        while(!isNumeric(cS)){//Mientras no sea numérico
+                System.out.print("Ingrese un dato válido para el número de columna: ");
+                cS = INGRESO.nextLine();
+            }
+        int columna = Integer.parseInt(cS); //Columna del dato a insertar
+        if(TA != null){
+            TA.eliminarTrip(fila, columna);
+        }else{
+            System.out.println("No se ha creado ninguna matriz");
+        }
+    }
+    
     //muestra la matriz en su forma dispersa
-    private static void show(){
+    public static void show(){
         if (TA != null) {
             TA.mostrar();
         }else{
