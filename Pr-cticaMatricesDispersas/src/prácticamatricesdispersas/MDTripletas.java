@@ -186,7 +186,7 @@ public class MDTripletas {
             row++;
         }
         if (row < datos){
-            for (int i = row; i < datos - 2; i++) {
+            for (int i = row; i < datos - 1; i++) {
                 this.lista[i][0] = this.lista[i + 1][0];
                 this.lista[i][1] = this.lista[i + 1][1];
                 this.lista[i][2] = this.lista[i + 1][2];
@@ -200,8 +200,20 @@ public class MDTripletas {
     }
     
     //Suma dos matrices en forma de tripletas
-    public MDTripletas sumar(MDTripletas B){
-        return null;
+    public void sumar(MDTripletas B){
+        if (this.getNFilas() != B.getNFilas() || this.getNCol() != B.getNCol() ){
+            System.out.println("No se pueden sumar las matrices, dimensiones incompatibles");
+        }else{
+            MDTripletas R = new MDTripletas(this.getNFilas(), this.getNCol(), 0);
+            for (int i = 1; i <= this.getNDatos(); i++) {
+                R.almacenarTrip((int)this.getDato(i, 0), (int)this.getDato(i, 1), this.getDato(i, 2));
+            }
+            for (int i = 1; i <= B.getNDatos(); i++) {
+                R.almacenarTrip((int)B.getDato(i, 0), (int)B.getDato(i, 1), B.getDato(i, 2));
+            }
+            System.out.println("El resultado de la suma genera la siguiente tripleta: ");
+            R.mostrar();
+        }
     }
     
     //multiplica dos matrices en forma de tripletas
