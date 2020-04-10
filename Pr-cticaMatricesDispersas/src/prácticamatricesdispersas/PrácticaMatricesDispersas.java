@@ -69,6 +69,7 @@ public class PrácticaMatricesDispersas {
                     multiply();
                     again();
                 case 7:
+                    sumRows();
                     again();
                 case 8:
                     again();
@@ -267,7 +268,7 @@ public class PrácticaMatricesDispersas {
         if (TA == null) {
             initialize();
             TA.almacenarTrip(fila, columna, dato); 
-        }else if(fila > TA.getNFilas() || columna > TA.getNCol()){
+        }else if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
             TA.almacenarTrip(fila, columna, dato); 
@@ -301,7 +302,7 @@ public class PrácticaMatricesDispersas {
         if (TA == null) {
             initialize();
             TA.insertarTrip(fila, columna, dato); 
-        }else if(fila > TA.getNFilas() || columna > TA.getNCol()){
+        }else if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
             TA.insertarTrip(fila, columna, dato); 
@@ -628,6 +629,15 @@ public class PrácticaMatricesDispersas {
             System.out.println("\nLista tripleta:\n");
             //Imprime tripleta
             TB.mostrar();
+        }
+    }
+    
+    //Suma las filas
+    public static void sumRows(){
+        if(TA == null){
+            System.out.println("No ha ingresado matriz alguna");
+        }else{
+            TA.sumarFilas();
         }
     }
     
