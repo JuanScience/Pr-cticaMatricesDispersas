@@ -190,12 +190,41 @@ public class MDTripletas {
     
     //Calcula el promedio de las columnas de la matriz
     public void promedioCol(){
-        
-    }
-    
-    //Muestra el mayor número de la tripleta
-    public void mayorMdTrip(){
-        
+        int Ndatos = this.getNDatos();
+        int columnas = this.getNCol();
+        int columna = 0;
+        float sum = 0;
+        if(Ndatos == 0){
+            for (int i = 0; i < columnas; i++) {
+                System.out.println("El promedio de la columna " + i + " es: " + sum);
+            }
+        }
+        for (int i = 1; i <= Ndatos; i++) {
+            if(i < Ndatos){
+                if (columna == this.getDato(i, 1)){
+                    sum = sum + this.getDato(i, 2);
+                }
+                while (columna < this.getDato(i + 1, 1)) {
+                    sum = sum / columnas;
+                    System.out.println("El promedio de la columna " + columna + " es: " + sum);
+                    sum = 0;
+                    columna++;
+                    if (columna == this.getDato(i, 1)){
+                        sum = sum + this.getDato(i, 2);
+                    }
+                }
+            }else{
+                while (columna < columnas) {
+                    if (columna == this.getDato(i, 1)){
+                        sum = sum + this.getDato(i, 2);
+                    }
+                    sum = sum / columnas;
+                    System.out.println("El promedio de la columna " + columna + " es: " + sum);
+                    sum = 0;
+                    columna++;
+                }
+            }         
+        }
     }
     
     //Elimina una tripleta
@@ -270,16 +299,6 @@ public class MDTripletas {
             R.mostrar();
         }
         
-    }
-    
-    //Compara dos tripletas
-    public MDTripletas comparar(MDTripletas B){
-        return null;
-    }
-    
-    //Hace una copia de una tripleta
-    public MDTripletas hacerCopia(){
-        return null;
     }
     
     //Hace una copia de la tripleta aumentada en un espacio y corre los datos dejando libre la fila del parámetro
