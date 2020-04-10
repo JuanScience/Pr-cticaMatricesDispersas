@@ -27,7 +27,7 @@ public class PrácticaMatricesDispersas {
         System.out.println("(5) * Sumar");
         System.out.println("(6) * Multiplicar");
         System.out.println("(7) * Sumar filas");
-        System.out.println("(8) * Sumar columnas");
+        System.out.println("(8) * Promediar columnas");
         System.out.println("(9) * T  + F1 = F2");
         System.out.println("(10)* F1 + F2 = T");
         System.out.println("(11)* T  + F2 = F1");
@@ -72,6 +72,7 @@ public class PrácticaMatricesDispersas {
                     sumRows();
                     again();
                 case 8:
+                    averageCol();
                     again();
                 case 9:
                     again();
@@ -638,6 +639,15 @@ public class PrácticaMatricesDispersas {
             System.out.println("No ha ingresado matriz alguna");
         }else{
             TA.sumarFilas();
+        }
+    }
+    
+    //Promedio de las columnas
+    public static void averageCol(){
+        if(TA == null){
+            System.out.println("No ha ingresado matriz alguna");
+        }else{
+            TA.promedioCol();
         }
     }
     
