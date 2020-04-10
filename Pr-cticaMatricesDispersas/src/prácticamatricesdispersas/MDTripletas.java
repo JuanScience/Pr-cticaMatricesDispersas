@@ -141,16 +141,6 @@ public class MDTripletas {
         return (int) lista[0][2];
     }
     
-    //Devuelve la columna donde está un dato (pensar método)
-    public int getFila(){
-        return 0;
-    }
-    
-    //Devuelve la fila donde está un dato (pensar método)
-    public int getCol(){
-        return 0;
-    }
-    
     //Devuelve el Dato de una posición específica
     public float getDato(int f, int c){
         return lista[f][c];
@@ -163,7 +153,39 @@ public class MDTripletas {
     
     //Suma las filas de la matriz
     public void sumarFilas(){
-        
+        int Ndatos = this.getNDatos();
+        int filas = this.getNFilas();
+        int fila = 0;
+        float sum = 0;
+        if(Ndatos == 0){
+            for (int i = 0; i < filas; i++) {
+                System.out.println("La suma de la fila " + i + " es: " + sum);
+            }
+        }
+        for (int i = 1; i <= Ndatos; i++) {
+            if(i < Ndatos){
+                if (fila == this.getDato(i, 0)){
+                    sum = sum + this.getDato(i, 2);
+                }
+                while (fila < this.getDato(i + 1, 0)) {
+                    System.out.println("La suma de la fila " + fila + " es: " + sum);
+                    sum = 0;
+                    fila++;
+                    if (fila == this.getDato(i, 0)){
+                        sum = sum + this.getDato(i, 2);
+                    }
+                }
+            }else{
+                while (fila < filas) {
+                    if (fila == this.getDato(i, 0)){
+                        sum = sum + this.getDato(i, 2);
+                    }
+                    System.out.println("La suma de la fila " + fila + " es: " + sum);
+                    sum = 0;
+                    fila++;
+                }
+            }         
+        }
     }
     
     //Calcula el promedio de las columnas de la matriz
