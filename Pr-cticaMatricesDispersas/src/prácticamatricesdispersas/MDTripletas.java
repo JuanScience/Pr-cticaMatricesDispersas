@@ -64,7 +64,6 @@ public class MDTripletas {
             this.setDato(k, 2, d);
         }
         this.redimensionarListaTrip();
-        System.out.println("Dato ingresado");
     }
     
     //Inserta una tripleta, si encuentra un dato en la misma posición lo cambia
@@ -97,7 +96,6 @@ public class MDTripletas {
             this.setDato(k, 2, d);
         }
         this.redimensionarListaTrip();
-        System.out.println("Dato ingresado");
     }
     
     //Elimina una fila de la tripleta si encuentra un cero
@@ -244,7 +242,6 @@ public class MDTripletas {
             }
             this.lista[datos - 1][2] = 0;
             this.redimensionarListaTrip();
-            System.out.println("Dato eliminado");
         }else{
             System.out.println("No se encontró dato");
         }
