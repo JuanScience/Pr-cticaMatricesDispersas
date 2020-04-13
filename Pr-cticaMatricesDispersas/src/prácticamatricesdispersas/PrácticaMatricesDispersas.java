@@ -11,6 +11,7 @@ public class PrácticaMatricesDispersas {
     private static final Scanner INGRESO = new Scanner (System.in);
     private static String cS;
     private static MDTripletas TA, TB;
+    private static Forma1 F1A, F1B;
     
     //Método principal
     public static void main(String[] args) {      
@@ -32,9 +33,10 @@ public class PrácticaMatricesDispersas {
         System.out.println("(10)* F1 + F2 = T");
         System.out.println("(11)* T  + F2 = F1");
         System.out.println("(12)* Imprimir");
+        System.out.println("(13)* Borrar");
         System.out.println("(0) * Salir");
         System.out.println("----------------------------------------\n");
-        System.out.print("Ingrese una opción (0-?) -> ");
+        System.out.print("Ingrese una opción (0-13) -> ");
         opciones(INGRESO.nextLine());
     }
     
@@ -82,6 +84,9 @@ public class PrácticaMatricesDispersas {
                     again();
                 case 12:
                     show();
+                    again();
+                case 13:
+                    erase();
                     again();
                 case 0:
                     System.exit(0);
@@ -201,6 +206,7 @@ public class PrácticaMatricesDispersas {
         // Convierte a tripletas
         System.out.println("\nMatriz:\n");
         TA = new MDTripletas(filas, columnas, count); //Instancia e inicializa la tripleta
+        F1A = new Forma1(filas, columnas);
         int conteof = 1;
         for(int i = 0; i < filas; i++){ //Imprime la matriz y convierte a tripleta
             System.out.print("|");
@@ -214,6 +220,7 @@ public class PrácticaMatricesDispersas {
                     TA.setDato(conteof, 1, j);
                     TA.setDato(conteof, 2, (int) matriz[i][j]);
                     conteof++;
+                    F1A.insertarS(i, j, matriz[i][j]);
                 }
             }
             System.out.println(" |");
@@ -221,6 +228,8 @@ public class PrácticaMatricesDispersas {
         System.out.println("\nLista tripleta:\n");
         //Imprime tripleta
         TA.mostrar();
+        System.out.println("\nLista Forma 1:\n");
+        F1A.mostrar();
     }
     
     public static void initialize(){ //Crea una matriz sin datos
@@ -240,6 +249,7 @@ public class PrácticaMatricesDispersas {
             }
         int columnas = Integer.parseInt(cS); //Número de columnas que ingresa el usuario
         TA = new MDTripletas(filas, columnas, 1); //Instancia e inicializa la tripleta
+        F1A = new Forma1(filas, columnas);
     }
     
     //Inserta dato, si encuentra uno en la posición lo suma
@@ -269,10 +279,13 @@ public class PrácticaMatricesDispersas {
         if (TA == null) {
             initialize();
             TA.almacenarTrip(fila, columna, dato); 
+            F1A.insertarS(fila, columna, dato);
         }else if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
             TA.almacenarTrip(fila, columna, dato); 
+            F1A.insertarS(fila, columna, dato);
+            System.out.println("Dato ingresado");
         }           
     }
     
@@ -302,11 +315,14 @@ public class PrácticaMatricesDispersas {
         
         if (TA == null) {
             initialize();
-            TA.insertarTrip(fila, columna, dato); 
+            TA.insertarTrip(fila, columna, dato);
+            F1A.insertarC(fila, columna, dato);
         }else if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
-            TA.insertarTrip(fila, columna, dato); 
+            TA.insertarTrip(fila, columna, dato);
+            F1A.insertarC(fila, columna, dato);
+            System.out.println("Dato ingresado");
         }       
     }
     
@@ -328,6 +344,8 @@ public class PrácticaMatricesDispersas {
         int columna = Integer.parseInt(cS); //Columna del dato a insertar
         if(TA != null){
             TA.eliminarTrip(fila, columna);
+            F1A.eliminar(fila, columna);
+            System.out.println("Dato eliminado");
         }else{
             System.out.println("No se ha creado ninguna matriz");
         }
@@ -477,6 +495,7 @@ public class PrácticaMatricesDispersas {
     public static void show(){
         if (TA != null) {
             TA.mostrar();
+            F1A.mostrar();
         }else{
             System.out.println("No hay nada para ver");
         }
@@ -649,6 +668,13 @@ public class PrácticaMatricesDispersas {
         }else{
             TA.promedioCol();
         }
+    }
+    
+    //Borra las matrices
+    public static void erase(){
+        TA = null;
+        F1A = null;
+        System.out.println("Borradas correctamente");
     }
     
 }
