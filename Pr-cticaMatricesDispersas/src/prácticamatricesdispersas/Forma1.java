@@ -207,4 +207,36 @@ public class Forma1 {
             }
         }
     }    
+
+    public void sumar(Forma1 F1B) {
+        int filas = this.punta.getFila();
+        int columnas = this.punta.getColumna();
+        if (filas == F1B.punta.getFila() && columnas == F1B.punta.getColumna()){
+            Forma1 F1R = new Forma1(filas, columnas);
+            Nodo1 head, row;
+            head = this.punta;
+            int rows = filas;
+            if (columnas > rows)
+                rows = columnas;
+            for (int i = 0; i <= rows; i++) {
+                row = head.getLF();
+                while (row.getLiga() == null ) {
+                    F1R.insertarS(row.getFila(), row.getColumna(), row.getDato());
+                    row = row.getLF();
+                }
+                head = head.getLiga();
+            }
+            head = F1B.punta;
+            for (int i = 0; i <= rows; i++) {
+                row = head.getLF();
+                while (row.getLiga() == null ) {
+                    F1R.insertarS(row.getFila(), row.getColumna(), row.getDato());
+                    row = row.getLF();
+                }
+                head = head.getLiga();
+            }
+            System.out.println("El resultado de la suma genera la siguiente forma 1: ");
+            F1R.mostrar();
+        }
+    }
 }
