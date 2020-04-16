@@ -685,7 +685,10 @@ public class PrácticaMatricesDispersas {
         if(TA == null){
             System.out.println("No ha ingresado matriz alguna");
         }else{
+            System.out.println("Para la tripleta:");
             TA.sumarFilas();
+            System.out.println("Para la forma 1:");
+            F1A.sumarFilas();
         }
     }
     
@@ -694,7 +697,10 @@ public class PrácticaMatricesDispersas {
         if(TA == null){
             System.out.println("No ha ingresado matriz alguna");
         }else{
+            System.out.println("Para la tripleta:");
             TA.promedioCol();
+            System.out.println("Para la forma 1:");
+            F1A.promedioCol();
         }
     }
     
