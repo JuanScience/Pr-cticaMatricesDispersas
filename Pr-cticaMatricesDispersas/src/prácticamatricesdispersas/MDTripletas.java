@@ -190,38 +190,21 @@ public class MDTripletas {
     public void promedioCol(){
         int Ndatos = this.getNDatos();
         int columnas = this.getNCol();
-        int columna = 0;
         float sum = 0;
         if(Ndatos == 0){
             for (int i = 0; i < columnas; i++) {
                 System.out.println("El promedio de la columna " + i + " es: " + sum);
             }
-        }
-        for (int i = 1; i <= Ndatos; i++) {
-            if(i < Ndatos){
-                if (columna == this.getDato(i, 1)){
-                    sum = sum + this.getDato(i, 2);
-                }
-                while (columna < this.getDato(i + 1, 1)) {
-                    sum = sum / columnas;
-                    System.out.println("El promedio de la columna " + columna + " es: " + sum);
-                    sum = 0;
-                    columna++;
-                    if (columna == this.getDato(i, 1)){
-                        sum = sum + this.getDato(i, 2);
+        }else{
+            for (int i = 0; i < columnas; i++) {
+                for (int j = 1; j <= Ndatos; j++) {
+                    if (this.getDato(j, 1) == i) {
+                        sum = sum + this.getDato(j, 2);
                     }
                 }
-            }else{
-                while (columna < columnas) {
-                    if (columna == this.getDato(i, 1)){
-                        sum = sum + this.getDato(i, 2);
-                    }
-                    sum = sum / columnas;
-                    System.out.println("El promedio de la columna " + columna + " es: " + sum);
-                    sum = 0;
-                    columna++;
-                }
-            }         
+                System.out.println("El promedio de la columna " + i + " es: " + sum / this.getNFilas());
+                sum = 0;
+            }
         }
     }
     
