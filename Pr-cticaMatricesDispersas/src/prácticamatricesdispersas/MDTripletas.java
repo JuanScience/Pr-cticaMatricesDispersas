@@ -269,33 +269,22 @@ public class MDTripletas {
         if(this.getNCol() != B.getNFilas()){
             System.out.println("No se pueden multiplicar las matrices, dimensiones incompatibles");
         }else{
-            int filas = this.getNCol();
-            int columnas = B.getNFilas();
+            int filas = this.getNFilas();
+            int columnas = B.getNCol();
             MDTripletas R = new MDTripletas(filas, columnas, 0);
-            float dato = 0;
             
             for (int i = 1; i <= this.getNDatos(); i++) {
                 
                 for (int j = 1; j <= B.getNDatos(); j++) {
-                    if (this.getDato(i, 0) == B.getDato(j, 1) && this.getDato(i, 1) == B.getDato(j, 0)) {
-                        dato = dato + (this.getDato(i, 2) * B.getDato(j, 2));
-                        if (i < this.getNDatos()){
-                            if (this.getDato(i, 0) != this.getDato(i + 1, 0) && dato != 0) {
-                                R.insertarTrip((int)this.getDato(i, 0), (int)B.getDato(j, 1), dato);
-                                dato = 0;
-                            }
-                        }else{
-                            if (dato != 0) {
-                                R.insertarTrip((int)this.getDato(i, 0), (int)B.getDato(j, 1), dato);
-                            }
-                        }
-                    }                    
+                    
+                    if(this.getDato(i, 1) == B.getDato(j, 0))
+                        R.almacenarTrip((int)this.getDato(i, 0), (int)B.getDato(j, 1), this.getDato(i, 2) * B.getDato(j, 2) );
+                    
                 }
             }
             System.out.println("El resultado de la multiplicación genera la siguiente tripleta: ");
             R.mostrar();
         }
-        
     }
     
     //Hace una copia de la tripleta aumentada en un espacio y corre los datos dejando libre la fila del parámetro
