@@ -273,4 +273,38 @@ public class Forma1 {
             System.out.println("No se pueden multiplicar las matrices, dimensiones incompatibles");
         }
     }
+
+    public void sumarFilas() {
+        int rows = this.punta.getFila();
+        Nodo1 location;
+        Nodo1 row = this.punta.getLiga();
+        float sum = 0;
+        for (int i = 0; i < rows; i++) {
+            location = row.getLF();
+            while (location != row) {                
+                sum = sum + location.getDato();
+                location = location.getLF();
+            }
+            System.out.println("La suma de la fila " + i + " es: " + sum);
+            sum = 0;
+            row = row.getLiga();
+        }
+    }
+
+    public void promedioCol() {
+        int columns = this.punta.getColumna();
+        Nodo1 location;
+        Nodo1 column = this.punta.getLiga();
+        float average = 0;
+        for (int i = 0; i < columns; i++) {
+            location = column.getLC();
+            while (location != column) {                
+                average = average + location.getDato();
+                location = location.getLC();
+            }
+            System.out.println("El promedio de la columna " + i + " es: " + average / this.punta.getFila());
+            average = 0;
+            column = column.getLiga();
+        }
+    }
 }
