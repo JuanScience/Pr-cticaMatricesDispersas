@@ -239,4 +239,38 @@ public class Forma1 {
             F1R.mostrar();
         }
     }
+
+    public void multiplicar(Forma1 F1B) {
+
+        if(this.punta.getColumna() == F1B.punta.getFila()){
+            int filas = this.punta.getFila();
+            int columnas = F1B.punta.getColumna();
+            Forma1 R = new Forma1(filas, columnas);
+            Nodo1 pointA, pointB, rowA, rowB;
+            pointA = this.punta.getLiga();
+            while(pointA != this.punta){//recorre los nodos cabeza la primara matriz
+                rowA = pointA.getLF();
+                while(rowA != pointA){//recorre todas las filas de la primera matriz
+                    pointB = F1B.punta.getLiga();
+                    while(pointB != F1B.punta){//recorre los nodos cabeza de F1B
+                        rowB = pointB.getLF();
+                        while(rowB != pointB){//recorre las filas de F1B
+                            if(rowA.getColumna()== rowB.getFila()){
+                                R.insertarS(rowA.getFila(), rowB.getColumna(), rowA.getDato() * rowB.getDato());
+                            }
+                            rowB = rowB.getLF();
+                        }
+                        pointB = pointB.getLiga();
+                    }
+                    rowA = rowA.getLF();
+                }
+                pointA = pointA.getLiga();
+            }
+            
+            System.out.println("El resultado de la multiplicación genera la siguiente tripleta: ");
+            R.mostrar();
+        }else{
+            System.out.println("No se pueden multiplicar las matrices, dimensiones incompatibles");
+        }
+    }
 }
