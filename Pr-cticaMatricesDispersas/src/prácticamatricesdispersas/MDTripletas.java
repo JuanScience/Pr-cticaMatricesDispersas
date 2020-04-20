@@ -37,33 +37,35 @@ public class MDTripletas {
     
     //Almacena una tripleta, si encuentra un dato en la misma posición lo suma
     public void almacenarTrip(int f, int c, float d){
-        int datos = getNDatos() + 1;
-        int k = 1;
-        //Mientras recorre toda las filas de la tripleta hasta la posición de almacenamiento
-        while(k < datos && (lista[k][0] < f) && lista[k][2] != 0){ 
-            k++; //Identifica la fila de inserción
+        if(f < this.getNFilas() && c < this.getNCol() && d != 0){
+            int datos = getNDatos() + 1;
+            int k = 1;
+            //Mientras recorre toda las filas de la tripleta hasta la posición de almacenamiento
+            while(k < datos && (lista[k][0] < f) && lista[k][2] != 0){ 
+                k++; //Identifica la fila de inserción
+            }
+            while(k < datos && lista[k][0] == f && lista[k][1] < c && lista[k][2] != 0){ 
+                k++; //Identifica la fila de inserción
+            }
+            if (k >= datos){
+                this.makeCopyPlusOne(k);
+                this.setDato(k, 0, f);
+                this.setDato(k, 1, c);
+                this.setDato(k, 2, d);
+            }else if (lista[k][0] == f && lista[k][1] == c) {
+                this.setDato(k, 2,  d + lista[k][2]);
+            }else if (lista[k][2] == 0){
+                this.setDato(k, 0, f);
+                this.setDato(k, 1, c);
+                this.setDato(k, 2, d);
+            }else{
+                this.makeCopyPlusOne(k);
+                this.setDato(k, 0, f);
+                this.setDato(k, 1, c);
+                this.setDato(k, 2, d);
+            }
+            this.redimensionarListaTrip();
         }
-        while(k < datos && lista[k][0] == f && lista[k][1] < c && lista[k][2] != 0){ 
-            k++; //Identifica la fila de inserción
-        }
-        if (k >= datos){
-            this.makeCopyPlusOne(k);
-            this.setDato(k, 0, f);
-            this.setDato(k, 1, c);
-            this.setDato(k, 2, d);
-        }else if (lista[k][0] == f && lista[k][1] == c) {
-            this.setDato(k, 2,  d + lista[k][2]);
-        }else if (lista[k][2] == 0){
-            this.setDato(k, 0, f);
-            this.setDato(k, 1, c);
-            this.setDato(k, 2, d);
-        }else{
-            this.makeCopyPlusOne(k);
-            this.setDato(k, 0, f);
-            this.setDato(k, 1, c);
-            this.setDato(k, 2, d);
-        }
-        this.redimensionarListaTrip();
     }
     
     //Inserta una tripleta, si encuentra un dato en la misma posición lo cambia
@@ -300,5 +302,41 @@ public class MDTripletas {
             }
         }
         return bigger;
+    }
+
+    public void plus(Forma1 F1B) {
+        Forma2 R  = new Forma2(this.getNFilas(), this.getNCol());
+        int datos = this.getNDatos();
+        for (int i = 1; i <= datos; i++) {
+            R.insertarS((int)this.getDato(i, 0), (int)this.getDato(i, 1), this.getDato(i, 2));
+        }
+        Nodo1 head, row;
+        head = F1B.punta.getLiga();
+        while (head != F1B.punta) {
+            row = head.getLF();
+            while (row != head) {                
+                R.insertarS(row.getFila(), row.getColumna(), row.getDato());
+                row = row.getLF();
+            }
+            head = head.getLiga();
+        }
+        System.out.println("El resultado es la siguiente lista F2");
+        R.mostrar();
+    }
+
+    public void plus(Forma2 F2B) {
+        Forma1 R  = new Forma1(this.getNFilas(), this.getNCol());
+        int datos = this.getNDatos();
+        for (int i = 1; i <= datos; i++) {
+            R.insertarS((int)this.getDato(i, 0), (int)this.getDato(i, 1), this.getDato(i, 2));
+        }
+        Nodo2 head;
+        head = F2B.punta.getLF();
+        while (head != F2B.punta) {
+            R.insertarS(head.getFila(), head.getColumna(), head.getDato());
+            head = head.getLF();
+        }
+        System.out.println("El resultado es la siguiente lista F1");
+        R.mostrar();
     }
 }
