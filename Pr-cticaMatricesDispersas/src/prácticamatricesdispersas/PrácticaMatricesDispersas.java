@@ -78,10 +78,13 @@ public class PrácticaMatricesDispersas {
                     averageCol();
                     again();
                 case 9:
+                    MultiplePlus(1);
                     again();
                 case 10:
+                    MultiplePlus(2);
                     again();
                 case 11:
+                    MultiplePlus(3);
                     again();
                 case 12:
                     show();
@@ -182,59 +185,63 @@ public class PrácticaMatricesDispersas {
             }
         int rango = Integer.parseInt(cS); //Rango numérico del usuario (va desde -n hasta n)
         
-        float matriz[][] = new float[filas][columnas]; //Matriz generadora
-        float max = 0; //Guarda el mayor número
-        float min = 0; //Guarda el menor número
-        int count = 0; //Cuenta el número de posiciones diferentes a cero en la matriz
-        
-        for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
-            for (int j = 0; j < columnas; j++) {
-                matriz[i][j] = getAleatorio(rango, 0, (float) 0.6);
-                if(matriz[i][j] > max) //Guarda el dato mayor de la matriz
-                    max = matriz[i][j];
-                if(matriz[i][j] < min)
-                    min = matriz[i][j]; //Guarda el dato menor de la matriz
-                if(matriz[i][j] != 0)
-                    count++; //Guarda el número de datos diferentes a cero
-            }
-        }
-        
-        float maxlen = min;
-        if (Float.toString(min).length() < Float.toString(max).length())
-            maxlen = max;
-        int digitos = Float.toString(maxlen).length(); //Guarda el número de dígitos del número más lárgo de la matriz
-        
-        // Convierte a tripletas
-        System.out.println("\nMatriz:\n");
-        TA = new MDTripletas(filas, columnas, count); //Instancia e inicializa la tripleta
-        F1A = new Forma1(filas, columnas);
-        F2A = new Forma2(filas, columnas);
-        int conteof = 1;
-        for(int i = 0; i < filas; i++){ //Imprime la matriz y convierte a tripleta
-            System.out.print("|");
-            for (int j = 0; j < columnas; j++) {
-                String espacios = " ";
-                for (int k = 1 ; k <= digitos - Float.toString(matriz[i][j]).length(); k++) //Calcula el número de espacios para ordenar la impresión
-                    espacios = espacios + " ";
-                System.out.print(espacios + matriz[i][j]); //Imprime el dato
-                if(matriz[i][j] != 0){ //Si el dato es diferente de cero, lo ingresa en la tripleta
-                    TA.setDato(conteof, 0, i);
-                    TA.setDato(conteof, 1, j);
-                    TA.setDato(conteof, 2, (int) matriz[i][j]);
-                    conteof++;
-                    F1A.insertarS(i, j, matriz[i][j]);
-                    F2A.insertarS(i, j, matriz[i][j]);
+        if(filas > 0 && columnas > 0 && rango > 0){
+            float matriz[][] = new float[filas][columnas]; //Matriz generadora
+            float max = 0; //Guarda el mayor número
+            float min = 0; //Guarda el menor número
+            int count = 0; //Cuenta el número de posiciones diferentes a cero en la matriz
+
+            for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
+                for (int j = 0; j < columnas; j++) {
+                    matriz[i][j] = getAleatorio(rango, 0, (float) 0.6);
+                    if(matriz[i][j] > max) //Guarda el dato mayor de la matriz
+                        max = matriz[i][j];
+                    if(matriz[i][j] < min)
+                        min = matriz[i][j]; //Guarda el dato menor de la matriz
+                    if(matriz[i][j] != 0)
+                        count++; //Guarda el número de datos diferentes a cero
                 }
             }
-            System.out.println(" |");
+
+            float maxlen = min;
+            if (Float.toString(min).length() < Float.toString(max).length())
+                maxlen = max;
+            int digitos = Float.toString(maxlen).length(); //Guarda el número de dígitos del número más lárgo de la matriz
+
+            // Convierte a tripletas
+            System.out.println("\nMatriz:\n");
+            TA = new MDTripletas(filas, columnas, count); //Instancia e inicializa la tripleta
+            F1A = new Forma1(filas, columnas);
+            F2A = new Forma2(filas, columnas);
+            int conteof = 1;
+            for(int i = 0; i < filas; i++){ //Imprime la matriz y convierte a tripleta
+                System.out.print("|");
+                for (int j = 0; j < columnas; j++) {
+                    String espacios = " ";
+                    for (int k = 1 ; k <= digitos - Float.toString(matriz[i][j]).length(); k++) //Calcula el número de espacios para ordenar la impresión
+                        espacios = espacios + " ";
+                    System.out.print(espacios + matriz[i][j]); //Imprime el dato
+                    if(matriz[i][j] != 0){ //Si el dato es diferente de cero, lo ingresa en la tripleta
+                        TA.setDato(conteof, 0, i);
+                        TA.setDato(conteof, 1, j);
+                        TA.setDato(conteof, 2, (int) matriz[i][j]);
+                        conteof++;
+                        F1A.insertarS(i, j, matriz[i][j]);
+                        F2A.insertarS(i, j, matriz[i][j]);
+                    }
+                }
+                System.out.println(" |");
+            }
+            System.out.println("\nLista tripleta:\n");
+            //Imprime tripleta
+            TA.mostrar();
+            System.out.println("\nLista Forma 1:");
+            F1A.mostrar();
+            System.out.println("\n\nLista Forma 2:");
+            F2A.mostrar();        
+        }else{
+            System.out.println("Ingrese datos positivos, intente nuevamente");
         }
-        System.out.println("\nLista tripleta:\n");
-        //Imprime tripleta
-        TA.mostrar();
-        System.out.println("\nLista Forma 1:\n");
-        F1A.mostrar();
-        System.out.println("\nLista Forma 2:\n");
-        F2A.mostrar();        
     }
     
     public static void initialize(){ //Crea una matriz sin datos
@@ -253,9 +260,13 @@ public class PrácticaMatricesDispersas {
                 cS = INGRESO.nextLine();
             }
         int columnas = Integer.parseInt(cS); //Número de columnas que ingresa el usuario
-        TA = new MDTripletas(filas, columnas, 1); //Instancia e inicializa la tripleta
-        F1A = new Forma1(filas, columnas);
-        F2A = new Forma2(filas, columnas);
+        if(filas > 0 && columnas > 0){
+            TA = new MDTripletas(filas, columnas, 1); //Instancia e inicializa la tripleta
+            F1A = new Forma1(filas, columnas);
+            F2A = new Forma2(filas, columnas);
+        }else{
+            System.out.println("Ingrese datos positivos, intente nuevamente");
+        }
     }
     
     //Inserta dato, si encuentra uno en la posición lo suma
@@ -282,12 +293,10 @@ public class PrácticaMatricesDispersas {
                 cS = INGRESO.nextLine();
             }
         int dato = Integer.parseInt(cS); //dato a insertar
-        if (TA == null) {
+        while(TA == null){
             initialize();
-            TA.almacenarTrip(fila, columna, dato); 
-            F1A.insertarS(fila, columna, dato);
-            F2A.insertarS(fila, columna, dato);
-        }else if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
+        }
+        if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
             TA.almacenarTrip(fila, columna, dato); 
@@ -321,12 +330,10 @@ public class PrácticaMatricesDispersas {
             }
         int dato = Integer.parseInt(cS); //dato a insertar
         
-        if (TA == null) {
+        while(TA == null){
             initialize();
-            TA.insertarTrip(fila, columna, dato);
-            F1A.insertarC(fila, columna, dato);
-            F2A.insertarC(fila, columna, dato);
-        }else if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
+        }
+        if(fila > TA.getNFilas() - 1 || columna > TA.getNCol() - 1){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
             TA.insertarTrip(fila, columna, dato);
@@ -450,31 +457,34 @@ public class PrácticaMatricesDispersas {
                     cS = INGRESO.nextLine();
                 }
             int rango = Integer.parseInt(cS); //Rango numérico del usuario (va desde -n hasta n)
-            
-            TB = new MDTripletas(filas, columnas, 0); //Instancia e inicializa la tripleta
-            F1B = new Forma1(filas, columnas);
-            F2B = new Forma2(filas, columnas);
-            int dato;
-            for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
-                for (int j = 0; j < columnas; j++) {
-                    dato = getAleatorio(rango, 0, (float) 0.6);
-                    if(dato > 0){ //Guarda el dato en la tripleta
-                        TB.almacenarTrip(i, j, dato);
-                        F1B.insertarC(i, j, dato);
-                        F2B.insertarC(i, j, dato);
+            if(rango > 0){
+                TB = new MDTripletas(filas, columnas, 0); //Instancia e inicializa la tripleta
+                F1B = new Forma1(filas, columnas);
+                F2B = new Forma2(filas, columnas);
+                int dato;
+                for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
+                    for (int j = 0; j < columnas; j++) {
+                        dato = getAleatorio(rango, 0, (float) 0.6);
+                        if(dato > 0){ //Guarda el dato en la tripleta
+                            TB.almacenarTrip(i, j, dato);
+                            F1B.insertarC(i, j, dato);
+                            F2B.insertarC(i, j, dato);
+                        }
                     }
                 }
-            }
 
-            System.out.println("\nLista tripleta:\n");
-            //Imprime tripleta
-            TB.mostrar();
-            System.out.println("\nForma 1:\n");
-            //Imprime F1
-            F1B.mostrar();
-            System.out.println("\nForma 2:\n");
-            //Imprime F2
-            F2B.mostrar();
+                System.out.println("\nLista tripleta:\n");
+                //Imprime tripleta
+                TB.mostrar();
+                System.out.println("\nForma 1:\n");
+                //Imprime F1
+                F1B.mostrar();
+                System.out.println("\nForma 2:\n");
+                //Imprime F2
+                F2B.mostrar();
+            }else{
+                System.out.println("Ingrese un rango válido, intente nuevamente");
+            }
         }
     }
     
@@ -505,10 +515,8 @@ public class PrácticaMatricesDispersas {
         
         if (TB == null) {
             initializeB();
-            TB.insertarTrip(fila, columna, dato);
-            F1B.insertarC(fila, columna, dato);
-            F2B.insertarC(fila, columna, dato);
-        }else if(fila > TB.getNFilas() || columna > TB.getNCol()){
+        }
+        if(fila > TB.getNFilas() || columna > TB.getNCol()){
             System.out.println("La posición del dato excede la dimensión de la matríz.");
         }else{
             TB.insertarTrip(fila, columna, dato);
@@ -637,18 +645,20 @@ public class PrácticaMatricesDispersas {
             }
         int dato = Integer.parseInt(cS); //dato a insertar
         
-        if (TB == null) {
-            initializeMB();
-            TB.insertarTrip(fila, columna, dato);
-            F1B.insertarC(fila, columna, dato);
-            F2B.insertarC(fila, columna, dato);
-        }else if(fila > TB.getNFilas() || columna > TB.getNCol()){
-            System.out.println("La posición del dato excede la dimensión de la matríz.");
+        if(fila > 0 && columna > 0){
+            while (TB == null) {
+                initializeMB();
+            }
+            if(fila > TB.getNFilas() || columna > TB.getNCol()){
+                System.out.println("La posición del dato excede la dimensión de la matríz.");
+            }else{
+                TB.insertarTrip(fila, columna, dato);
+                F1B.insertarC(fila, columna, dato);
+                F2B.insertarC(fila, columna, dato);
+            }  
         }else{
-            TB.insertarTrip(fila, columna, dato);
-            F1B.insertarC(fila, columna, dato);
-            F2B.insertarC(fila, columna, dato);
-        }  
+            System.out.println("Ingrese datos válidos, intente nuevamente");
+        }
     }
     
     //Inicializa la matriz B para multiplicar
@@ -661,9 +671,13 @@ public class PrácticaMatricesDispersas {
                 cS = INGRESO.nextLine();
             }
         int columnas = Integer.parseInt(cS); //Número de columnas que ingresa el usuario
-        TB = new MDTripletas(filas, columnas, 1); //Instancia e inicializa la tripleta
-        F1B = new Forma1(filas, columnas);
-        F2B = new Forma2(filas, columnas);
+        if (filas > 0 && columnas > 0){
+            TB = new MDTripletas(filas, columnas, 1); //Instancia e inicializa la tripleta
+            F1B = new Forma1(filas, columnas);
+            F2B = new Forma2(filas, columnas);
+        }else{
+            System.out.println("Ingrese datos válidos, intente nuevamente");
+        }  
     }
     
     //Crea una matriz de números aleatorios para multiplicar
@@ -689,30 +703,34 @@ public class PrácticaMatricesDispersas {
                 }
             int rango = Integer.parseInt(cS); //Rango numérico del usuario (va desde -n hasta n)
             
-            TB = new MDTripletas(filas, columnas, 0); //Instancia e inicializa la tripleta
-            F1B = new Forma1(filas, columnas);
-            F2B = new Forma2(filas, columnas);
-            int dato;
-            for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
-                for (int j = 0; j < columnas; j++) {
-                    dato = getAleatorio(rango, 0, (float) 0.6);
-                    if(dato > 0){ //Guarda el dato en la tripleta
-                        TB.almacenarTrip(i, j, dato);
-                        F1B.insertarC(i, j, dato);
-                        F2B.insertarC(i, j, dato);
+            if(filas > 0 && columnas > 0 && rango > 0){
+               TB = new MDTripletas(filas, columnas, 0); //Instancia e inicializa la tripleta
+                F1B = new Forma1(filas, columnas);
+                F2B = new Forma2(filas, columnas);
+                int dato;
+                for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
+                    for (int j = 0; j < columnas; j++) {
+                        dato = getAleatorio(rango, 0, (float) 0.6);
+                        if(dato > 0){ //Guarda el dato en la tripleta
+                            TB.almacenarTrip(i, j, dato);
+                            F1B.insertarC(i, j, dato);
+                            F2B.insertarC(i, j, dato);
+                        }
                     }
                 }
-            }
 
-            System.out.println("\nLista tripleta:\n");
-            //Imprime tripleta
-            TB.mostrar();
-            System.out.println("\nForma 1:\n");
-            //Imprime forma 1
-            F1B.mostrar();
-            System.out.println("\nForma 2:\n");
-            //Imprime forma 2
-            F2B.mostrar();
+                System.out.println("\nLista tripleta:\n");
+                //Imprime tripleta
+                TB.mostrar();
+                System.out.println("\nForma 1:\n");
+                //Imprime forma 1
+                F1B.mostrar();
+                System.out.println("\nForma 2:\n");
+                //Imprime forma 2
+                F2B.mostrar(); 
+            }else{
+                System.out.println("Ingrese datos válidos, intente nuevamente");
+            }  
         }
     }
     
@@ -750,6 +768,136 @@ public class PrácticaMatricesDispersas {
         F1A = null;
         F2A = null;
         System.out.println("Borradas correctamente");
+    }
+
+    //Valida si hay matriz para sumar
+    public static void MultiplePlus(int option) {
+        TB = null;
+        F1B = null;
+        F2B = null;
+        if (TA == null || F1A == null || F2B == null){
+            System.out.println("Declare primero una matriz para sumar");
+            again();
+        }else{
+            MultipleplusMenu(option);
+        }
+    }
+    
+    //menú de suma de matrices
+    public static void MultipleplusMenu(int option){
+        System.out.println("\n--------- MENÚ SUMAR ---------");
+        System.out.println("(1) * Generar");
+        System.out.println("(2) * Insertar (Cambiando dato)");
+        System.out.println("(3) * Sumar");
+        System.out.println("(4) * Mostrar primera matriz");
+        System.out.println("(5) * Mostrar segunda matriz");
+        System.out.println("(6) * Regresar");
+        System.out.println("------------------------------");
+        System.out.print("Ingrese una opción (0-6) -> ");
+        opcionesMultiplePlus(INGRESO.nextLine(), option);
+    }
+    
+    //Manejo de desición menú sumar
+    public static void opcionesMultiplePlus(String o, int option){
+        if(isNumeric(o)){
+            int n = Integer.parseInt(o);
+            switch (n){
+                case 1:
+                    generateMB(option);
+                    MultipleplusMenu(option);
+                case 2:
+                    insertChangeB();
+                    MultipleplusMenu(option);
+                case 3:
+                    if(TB == null)
+                        System.out.println("No hay matriz que sumar");
+                    else{
+                        switch(option){
+                            case 1:
+                                TA.plus(F1B);
+                            case 2:
+                                F1A.plus(F2B);
+                            case 3:
+                                TA.plus(F2B);
+                        }
+                    }
+                    again();
+                case 4:
+                    switch(option){
+                        case 1:
+                            TA.mostrar();
+                        case 2:
+                            F1B.mostrar();
+                        case 3:
+                            TA.mostrar();
+                    }
+                    MultipleplusMenu(option);
+                case 5:
+                    if(TB == null)
+                        System.out.println("No hay matriz que mostrar");
+                    else{
+                        switch(option){
+                            case 1:
+                                F1B.mostrar();//Imprime F1
+                            case 2:
+                                F2B.mostrar();//Imprime F2
+                            case 3:
+                                F2B.mostrar();//Imprime F2
+                        }
+                    }
+                    MultipleplusMenu(option);
+                case 6:
+                    again();
+                default:
+                    System.out.println("Ingreso no válido");
+                    MultipleplusMenu(option);
+            }
+        }else{
+            System.out.println("Ingreso no válido");
+            MultipleplusMenu(option);
+        }
+    }
+    
+    //Crea una matriz de números aleatorios para sumar
+    public static void generateMB(int option){
+        int filas = TA.getNFilas(); //Número de filas 
+        int columnas = TA.getNCol(); //Número de columnas 
+
+        System.out.print("Ingrese un rango n de números para llenar la matriz: (Se generarán números entre -n y n): ");
+            cS = INGRESO.nextLine();
+            while(!isNumeric(cS)){//Mientras no sea numérico
+                System.out.print("Ingrese un dato válido para el rango numérico: ");
+                cS = INGRESO.nextLine();
+            }
+        int rango = Integer.parseInt(cS); //Rango numérico del usuario (va desde -n hasta n)
+        if(rango > 0){
+            TB = new MDTripletas(filas, columnas, 0); //Instancia e inicializa la tripleta
+            F1B = new Forma1(filas, columnas);
+            F2B = new Forma2(filas, columnas);
+            int dato;
+            for(int i = 0; i < filas; i++){ //Genera la matriz aleatoria
+                for (int j = 0; j < columnas; j++) {
+                    dato = getAleatorio(rango, 0, (float) 0.6);
+                    if(dato > 0){ //Guarda el dato en la tripleta
+                        TB.almacenarTrip(i, j, dato);
+                        F1B.insertarC(i, j, dato);
+                        F2B.insertarC(i, j, dato);
+                    }
+                }
+            }
+            
+            switch(option){
+                case 1:
+                    F1B.mostrar();//Imprime F1
+                case 2:
+                    F2B.mostrar();//Imprime F2
+                case 3:
+                    F2B.mostrar();//Imprime F2
+            }
+
+        }else{
+            System.out.println("Ingrese un rango válido, intente nuevamente");
+        }
     }
     
 }
