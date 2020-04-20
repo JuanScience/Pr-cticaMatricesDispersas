@@ -323,8 +323,8 @@ public class Forma1 {
         Nodo2 position;
         position = F2B.punta.getLF();
         while (position != F2B.punta) {
-            R.almacenarTrip(head.getFila(), head.getColumna(), head.getDato());
-            head = head.getLF();
+            R.almacenarTrip(position.getFila(), position.getColumna(), position.getDato());
+            position = position.getLF();
         }
         System.out.println("El resultado es la siguiente tripleta");
         R.mostrar();
