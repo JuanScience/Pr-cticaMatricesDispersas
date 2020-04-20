@@ -62,7 +62,7 @@ public class Forma1 {
     public void insertarS (int f, int c, float d){
         if (f > this.punta.getFila() || c > this.punta.getColumna()){
             System.out.println("La posición del dato excede la dimensión de la matriz.");
-        }else{
+        }else if(d != 0){
             Nodo1 row, location;
             row = this.punta.getLiga();
             
@@ -267,7 +267,7 @@ public class Forma1 {
                 pointA = pointA.getLiga();
             }
             
-            System.out.println("El resultado de la multiplicación genera la siguiente tripleta: ");
+            System.out.println("El resultado de la multiplicación genera la siguiente lista F1: ");
             R.mostrar();
         }else{
             System.out.println("No se pueden multiplicar las matrices, dimensiones incompatibles");
@@ -306,5 +306,27 @@ public class Forma1 {
             average = 0;
             column = column.getLiga();
         }
+    }
+
+    public void plus(Forma2 F2B) {
+        Nodo1 head, row;
+        MDTripletas R = new MDTripletas(this.punta.getFila(), this.punta.getColumna(), 0);
+        head = this.punta.getLiga();
+        while (head != this.punta) {
+            row = head.getLF();
+            while (row != head) {                
+                R.almacenarTrip(row.getFila(), row.getColumna(), row.getDato());
+                row = row.getLF();
+            }
+            head = head.getLiga();
+        }
+        Nodo2 position;
+        position = F2B.punta.getLF();
+        while (position != F2B.punta) {
+            R.almacenarTrip(head.getFila(), head.getColumna(), head.getDato());
+            head = head.getLF();
+        }
+        System.out.println("El resultado es la siguiente tripleta");
+        R.mostrar();
     }
 }
