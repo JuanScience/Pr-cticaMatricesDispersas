@@ -775,7 +775,7 @@ public class PrácticaMatricesDispersas {
         TB = null;
         F1B = null;
         F2B = null;
-        if (TA == null || F1A == null || F2B == null){
+        if (TA == null || F1A == null || F2A == null){
             System.out.println("Declare primero una matriz para sumar");
             again();
         }else{
@@ -785,7 +785,17 @@ public class PrácticaMatricesDispersas {
     
     //menú de suma de matrices
     public static void MultipleplusMenu(int option){
-        System.out.println("\n--------- MENÚ SUMAR ---------");
+        switch(option){
+            case 1:
+                System.out.println("\n----- MENÚ SUMAR T+F1=F2-----");
+                break;
+            case 2:
+                System.out.println("\n----- MENÚ SUMAR F1+F2=T-----");
+                break;
+            case 3:
+                System.out.println("\n----- MENÚ SUMAR T+F2=F1-----");
+                break;
+        }        
         System.out.println("(1) * Generar");
         System.out.println("(2) * Insertar (Cambiando dato)");
         System.out.println("(3) * Sumar");
@@ -815,10 +825,13 @@ public class PrácticaMatricesDispersas {
                         switch(option){
                             case 1:
                                 TA.plus(F1B);
+                                break;
                             case 2:
                                 F1A.plus(F2B);
+                                break;
                             case 3:
                                 TA.plus(F2B);
+                                break;
                         }
                     }
                     again();
@@ -826,10 +839,13 @@ public class PrácticaMatricesDispersas {
                     switch(option){
                         case 1:
                             TA.mostrar();
+                            break;
                         case 2:
-                            F1B.mostrar();
+                            F1A.mostrar();
+                            break;
                         case 3:
                             TA.mostrar();
+                            break;
                     }
                     MultipleplusMenu(option);
                 case 5:
@@ -838,11 +854,14 @@ public class PrácticaMatricesDispersas {
                     else{
                         switch(option){
                             case 1:
-                                F1B.mostrar();//Imprime F1
+                                F1B.mostrar();
+                                break;
                             case 2:
-                                F2B.mostrar();//Imprime F2
+                                F2B.mostrar();
+                                break;
                             case 3:
-                                F2B.mostrar();//Imprime F2
+                                F2B.mostrar();
+                                break;
                         }
                     }
                     MultipleplusMenu(option);
@@ -888,11 +907,14 @@ public class PrácticaMatricesDispersas {
             
             switch(option){
                 case 1:
-                    F1B.mostrar();//Imprime F1
+                    F1B.mostrar();
+                    break;
                 case 2:
-                    F2B.mostrar();//Imprime F2
+                    F2B.mostrar();
+                    break;
                 case 3:
-                    F2B.mostrar();//Imprime F2
+                    F2B.mostrar();
+                    break;
             }
 
         }else{
