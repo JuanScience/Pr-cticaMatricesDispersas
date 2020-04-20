@@ -107,7 +107,7 @@ public class Forma2 {
         if(fila >= 0 && columna >= 0 && fila < this.punta.getFila() && columna < this.punta.getColumna() ){
             Nodo2 head = this.punta.getLF();
             Nodo2 tail = this.punta;
-            while((head.getFila() != fila && head.getColumna() != columna) || head != this.punta){
+            while((head.getFila() != fila || head.getColumna() != columna) && head != this.punta){
                 tail = head;
                 head = head.getLF();
             }
@@ -136,7 +136,7 @@ public class Forma2 {
             R.insertarS(head.getFila(), head.getColumna(), head.getDato());
             head = head.getLF();
         }
-        System.out.println("El resultado de la suma genera la siguiente lista F2: ");
+        System.out.println("\n\nEl resultado de la suma genera la siguiente lista F2: ");
         R.mostrar();
     }
 
@@ -153,7 +153,7 @@ public class Forma2 {
             }
             headA = headA.getLF();
         }
-        System.out.println("El resultado de la multiplicación genera la siguiente lista F2: ");
+        System.out.println("\n\nEl resultado de la multiplicación genera la siguiente lista F2: ");
         R.mostrar();
     }
 
